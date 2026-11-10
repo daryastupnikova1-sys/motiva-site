@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOTIVA — мотивирующие фразы с пропиской</title>
+  <meta name="description" content="MOTIVA — коллекция вдохновляющих фраз с авторами, источниками и проверкой достоверности. Найдите мысль, которая откликнется именно сегодня.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F4F1EA">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2317150F'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23F4F1EA' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="visually-hidden" href="#main">Перейти к содержанию</a>
+
+  <header class="topbar">
+    <a class="brand" href="#/" aria-label="MOTIVA — на главную">
+      <span class="brand__mark">M</span>
+      <span class="brand__text">Motiva<em>фразы с пропиской</em></span>
+    </a>
+
+    <div class="topbar__tools">
+      <label class="search">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.5 L18 18" stroke="currentColor" stroke-width="1.6"/></svg>
+        <input id="search" type="search" placeholder="Поиск по фразе или автору" aria-label="Поиск по фразе или автору" autocomplete="off">
+        <kbd title="Горячая клавиша: /">/</kbd>
+      </label>
+      <button id="favToggle" class="ghost" type="button" aria-pressed="false" title="Показать только избранное">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5l2.3 4.9 5.2.6-3.9 3.6 1 5.2L10 14.3 5.4 16.8l1-5.2L2.5 8l5.2-.6z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span>Избранное</span>
+      </button>
+      <button id="themeToggle" class="ghost" type="button" title="Переключить тему">
+        <span class="dot" aria-hidden="true"></span><span id="themeLabel">Тёмная</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- LIST VIEW -->
+    <section id="view-list" class="view">
+      <div class="hero">
+        <div class="hero__inner">
+          <p class="eyebrow"><span class="eyebrow__dot"></span> Мысль на сегодня · <span id="heroCount">0</span> фраз в коллекции</p>
+          <blockquote class="hero__quote">
+            <span id="heroQuote">…</span>
+          </blockquote>
+          <p class="hero__by">— <span id="heroAuthor"></span>, <span id="heroSource"></span></p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" id="heroLink" href="#/">Исследовать цитату <span aria-hidden="true">↗</span></a>
+            <button class="btn" id="randomBtn" type="button"><span aria-hidden="true">✳</span> Удиви меня</button>
+          </div>
+        </div>
+        <div class="hero__side" id="heroPortraitWrap" aria-hidden="true"></div>
+      </div>
+
+      <div class="legend">
+        <h2 class="legend__title">Как читать карточки</h2>
+        <ul class="legend__list" id="legendList"></ul>
+      </div>
+
+      <section class="mood" aria-labelledby="moodTitle">
+        <div class="mood__heading"><p class="eyebrow">Найди свою мысль</p><h2 id="moodTitle">Что тебе сейчас нужно?</h2></div>
+        <div class="mood__actions">
+          <button class="mood__button" type="button" data-theme="Стойкость">Сил не сдаваться <span>↗</span></button>
+          <button class="mood__button" type="button" data-theme="Действие">Начать действовать <span>↗</span></button>
+          <button class="mood__button" type="button" data-theme="Знание">Новый взгляд <span>↗</span></button>
+          <button class="mood__button" type="button" data-theme="Смысл">Найти вдохновение <span>↗</span></button>
+        </div>
+      </section>
+
+      <div class="filters">
+        <div class="filters__top"><div><p class="eyebrow">Библиотека</p><h2>Исследуй коллекцию</h2></div><div class="chips" id="chips" role="tablist" aria-label="Темы"></div></div>
+        <p class="filters__count" id="count" aria-live="polite"></p>
+      </div>
+
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden><span class="empty__mark">∅</span><h2>Пока ничего не найдено</h2><p>Попробуй изменить запрос или сбросить фильтры.</p><button class="btn btn--solid" id="resetFilters" type="button">Сбросить фильтры</button></div>
+    </section>
+
+    <!-- DETAIL VIEW (rendered by app.js) -->
+    <article id="view-detail" class="view detail" hidden></article>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__row">
+      <p class="foot__note">Учебный проект: HTML + CSS + JavaScript, без сборки и зависимостей. Данные о происхождении фраз собраны по открытым источникам; спорные атрибуции помечены отдельно.</p>
+      <p class="foot__meta">Поиск: <kbd>/</kbd> · закрыть цитату: <kbd>Esc</kbd> · переход между цитатами: <kbd>←</kbd> <kbd>→</kbd>.</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="portraits.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
