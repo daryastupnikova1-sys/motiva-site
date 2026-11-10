@@ -21,6 +21,7 @@
   --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
   --font-ui: "Helvetica Neue", "Segoe UI", Inter, Arial, system-ui, sans-serif;
   --maxw: 1180px;
+  --gutter: 40px;
   --r: 4px;
 }
 
@@ -96,7 +97,7 @@ kbd {
 .topbar {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
-  padding: 14px max(20px, calc((100vw - var(--maxw)) / 2));
+  padding: 14px max(var(--gutter), calc((100% - var(--maxw)) / 2));
   border-bottom: 1px solid var(--line);
   background: var(--paper);
   background: color-mix(in srgb, var(--paper) 82%, transparent);
@@ -153,7 +154,7 @@ kbd {
 
 /* ---------------- layout ---------------- */
 
-main { max-width: var(--maxw); margin: 0 auto; padding: 0 max(20px, calc((100vw - var(--maxw)) / 2)) 60px; }
+main { max-width: calc(var(--maxw) + var(--gutter) * 2); margin-inline: auto; padding: 0 var(--gutter) 60px; }
 .view[hidden] { display: none; }
 
 .eyebrow {
@@ -396,8 +397,8 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 0 max(20px, calc((100vw 
 
 .foot { border-top: 1px solid var(--line); margin-top: 70px; }
 .foot__row {
-  max-width: var(--maxw); margin: 0 auto;
-  padding: 26px max(20px, calc((100vw - var(--maxw)) / 2));
+  max-width: calc(var(--maxw) + var(--gutter) * 2); margin: 0 auto;
+  padding: 26px var(--gutter);
   display: flex; justify-content: space-between; gap: 26px; flex-wrap: wrap;
 }
 .foot__note, .foot__meta { font-size: 12px; color: var(--muted); max-width: 62ch; }
@@ -507,7 +508,7 @@ main { padding-bottom: 76px; }
   content: "";
   position: absolute;
   z-index: -1;
-  inset: 22px -36px 28px -36px;
+  inset: 22px calc(var(--gutter) * -0.9) 28px calc(var(--gutter) * -0.9);
   border: 1px solid var(--line-soft);
   border-radius: 28px;
   background: linear-gradient(120deg, var(--surface), color-mix(in srgb, var(--surface) 74%, var(--accent-soft)));
@@ -592,6 +593,7 @@ main { padding-bottom: 76px; }
   .chips { justify-content: flex-start; }
 }
 @media (max-width: 720px) {
+  :root { --gutter: 18px; }
   .topbar { align-items: center; }
   .topbar__tools { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 7px; }
   .search { min-width: 0; }
@@ -610,7 +612,7 @@ main { padding-bottom: 76px; }
   .legend { grid-template-columns: 1fr; gap: 14px; }
   .legend__list { grid-template-columns: 1fr; }
   .filters { padding-top: 28px; }
-  .chips { flex-wrap: nowrap; overflow-x: auto; width: calc(100vw - 36px); padding: 2px 2px 10px; scrollbar-width: thin; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; width: calc(100% + 36px); margin-inline: -18px; padding: 2px 18px 10px; scrollbar-width: thin; }
   .chip { flex: 0 0 auto; }
   .grid { grid-template-columns: 1fr; }
   .card { min-height: 250px; }
